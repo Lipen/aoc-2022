@@ -3,6 +3,7 @@
 
 # Build
 /target/
+Cargo.lock
 
 # Template
 /day0/
