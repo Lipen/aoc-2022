@@ -54,10 +54,7 @@ impl<'a, T, const N: usize> Iterator for ChunkIter<'a, T, N> {
 /// ```
 fn chunks<T, const N: usize>(data: &[T]) -> ChunkIter<T, N> {
     assert_eq!(data.len() % N, 0);
-    ChunkIter {
-        data,
-        index: 0,
-    }
+    ChunkIter { data, index: 0 }
 }
 
 fn intersection(mut sets: Vec<HashSet<char>>) -> HashSet<char> {
@@ -70,9 +67,7 @@ fn intersection(mut sets: Vec<HashSet<char>>) -> HashSet<char> {
     }
 
     let mut result = sets.pop().unwrap();
-    result.retain(|item| {
-        sets.iter().all(|set| set.contains(item))
-    });
+    result.retain(|item| sets.iter().all(|set| set.contains(item)));
     result
 }
 
@@ -107,7 +102,7 @@ fn main() -> color_eyre::Result<()> {
 
     println!("==> Solving part two...");
     let mut total_priority2 = 0;
-    for [a,b,c] in chunks::<_, 3>(&data) {
+    for [a, b, c] in chunks::<_, 3>(&data) {
         let a_chars: HashSet<char> = a.iter().copied().collect();
         let b_chars: HashSet<char> = b.iter().copied().collect();
         let c_chars: HashSet<char> = c.iter().copied().collect();

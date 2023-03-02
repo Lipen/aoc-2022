@@ -26,7 +26,8 @@ fn main() -> color_eyre::Result<()> {
         .lines()
         .filter_map(|x| x.ok())
         .map(|line| {
-            let xs = line.split(',')
+            let xs = line
+                .split(',')
                 .map(|s| {
                     let ys = s.split('-').collect_vec();
                     assert_eq!(ys.len(), 2);

@@ -77,10 +77,7 @@ fn main() -> color_eyre::Result<()> {
                 state[to - 1].push_back(elem);
             }
         }
-        let s: String = state
-            .iter()
-            .map(|x| x.back().unwrap())
-            .collect();
+        let s: String = state.iter().map(|x| x.back().unwrap()).collect();
         println!("Top of stacks: {}", s);
     }
 
@@ -97,10 +94,7 @@ fn main() -> color_eyre::Result<()> {
                 state[to - 1].push_back(elem);
             }
         }
-        let s: String = state
-            .iter()
-            .map(|x| x.back().unwrap())
-            .collect();
+        let s: String = state.iter().map(|x| x.back().unwrap()).collect();
         println!("Top of stacks: {}", s);
     }
 

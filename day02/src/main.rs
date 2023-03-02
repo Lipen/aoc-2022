@@ -75,63 +75,71 @@ fn main() -> color_eyre::Result<()> {
         .lines()
         .filter_map(|x| x.ok());
 
-    let data = lines.map(|line| {
-        let chars = line.chars().collect_vec();
-        assert_eq!(chars.len(), 3);
-        assert_eq!(chars[1], ' ');
-        let a = chars[0];
-        let b = chars[2];
-        (a, b)
-    }).collect_vec();
+    let data = lines
+        .map(|line| {
+            let chars = line.chars().collect_vec();
+            assert_eq!(chars.len(), 3);
+            assert_eq!(chars[1], ' ');
+            let a = chars[0];
+            let b = chars[2];
+            (a, b)
+        })
+        .collect_vec();
 
     println!("==> Solving part one...");
-    let score1: u32 = data.iter().map(|(a, b)| {
-        let opponent = match a {
-            'A' => Item::Rock,
-            'B' => Item::Paper,
-            'C' => Item::Scissors,
-            _ => panic!("Bad opponent move {:?}", a),
-        };
-        let answer = match b {
-            'X' => Item::Rock,
-            'Y' => Item::Paper,
-            'Z' => Item::Scissors,
-            _ => panic!("Bad answer move {:?}", b),
-        };
-        answer.score() + play(opponent, answer).score()
-    }).sum();
+    let score1: u32 = data
+        .iter()
+        .map(|(a, b)| {
+            let opponent = match a {
+                'A' => Item::Rock,
+                'B' => Item::Paper,
+                'C' => Item::Scissors,
+                _ => panic!("Bad opponent move {:?}", a),
+            };
+            let answer = match b {
+                'X' => Item::Rock,
+                'Y' => Item::Paper,
+                'Z' => Item::Scissors,
+                _ => panic!("Bad answer move {:?}", b),
+            };
+            answer.score() + play(opponent, answer).score()
+        })
+        .sum();
     println!("Score: {}", score1);
 
     println!("==> Solving part two...");
-    let score2: u32 = data.iter().map(|(a, b)| {
-        let opponent = match a {
-            'A' => Item::Rock,
-            'B' => Item::Paper,
-            'C' => Item::Scissors,
-            _ => panic!("Bad opponent move {:?}", a),
-        };
-        let answer = match b {
-            // Need to lose:
-            'X' => match opponent {
-                Item::Rock => Item::Scissors,
-                Item::Paper => Item::Rock,
-                Item::Scissors => Item::Paper,
-            },
+    let score2: u32 = data
+        .iter()
+        .map(|(a, b)| {
+            let opponent = match a {
+                'A' => Item::Rock,
+                'B' => Item::Paper,
+                'C' => Item::Scissors,
+                _ => panic!("Bad opponent move {:?}", a),
+            };
+            let answer = match b {
+                // Need to lose:
+                'X' => match opponent {
+                    Item::Rock => Item::Scissors,
+                    Item::Paper => Item::Rock,
+                    Item::Scissors => Item::Paper,
+                },
 
-            // Need to draw:
-            'Y' => opponent,
+                // Need to draw:
+                'Y' => opponent,
 
-            // Need to win:
-            'Z' => match opponent {
-                Item::Rock => Item::Paper,
-                Item::Paper => Item::Scissors,
-                Item::Scissors => Item::Rock,
-            },
+                // Need to win:
+                'Z' => match opponent {
+                    Item::Rock => Item::Paper,
+                    Item::Paper => Item::Scissors,
+                    Item::Scissors => Item::Rock,
+                },
 
-            _ => panic!("Bad answer move {:?}", b),
-        };
-        answer.score() + play(opponent, answer).score()
-    }).sum();
+                _ => panic!("Bad answer move {:?}", b),
+            };
+            answer.score() + play(opponent, answer).score()
+        })
+        .sum();
     println!("Score: {}", score2);
 
     Ok(())

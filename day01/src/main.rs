@@ -30,7 +30,7 @@ fn main() -> color_eyre::Result<()> {
         if line.is_empty() {
             if current != 0 {
                 data.push(current);
-                current= 0;
+                current = 0;
             }
         } else {
             current += line.parse::<u32>()?;
@@ -38,7 +38,7 @@ fn main() -> color_eyre::Result<()> {
     }
     if current != 0 {
         data.push(current);
-        current= 0;
+        current = 0;
     }
     assert_eq!(current, 0);
 

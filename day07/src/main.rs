@@ -88,7 +88,7 @@ impl Directory {
                 Entry::Dir(dir) => {
                     sizes.extend(dir.borrow().dir_sizes());
                 }
-                Entry::File {..}=>{}
+                Entry::File { .. } => {}
             }
         }
         sizes
@@ -164,7 +164,11 @@ fn main() -> color_eyre::Result<()> {
 
     println!("==> Solving part two...");
     let need_to_free = dir_sizes[0] - 40000000;
-    let ans2 = *dir_sizes.iter().filter(|&&s| s >= need_to_free).min().unwrap();
+    let ans2 = *dir_sizes
+        .iter()
+        .filter(|&&s| s >= need_to_free)
+        .min()
+        .unwrap();
     println!("Total size of removed dir: {}", ans2);
 
     Ok(())
