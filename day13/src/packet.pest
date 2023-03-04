@@ -1,0 +1,17 @@
+packet = _{ SOI ~ list ~ EOI }
+
+list = {
+    "[" ~ "]" |
+    "[" ~ value ~ ("," ~ value)* ~ "]"
+}
+
+value = _{ list | number }
+
+number = @{
+    "-"?
+    ~ ("0" | ASCII_NONZERO_DIGIT ~ ASCII_DIGIT*)
+    ~ ("." ~ ASCII_DIGIT*)?
+    ~ (^"e" ~ ("+" | "-")? ~ ASCII_DIGIT+)?
+}
+
+WHITESPACE = _{ " " | "\t" }
